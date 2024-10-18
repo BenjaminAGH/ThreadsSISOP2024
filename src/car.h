@@ -1,8 +1,6 @@
 #ifndef CAR_H
 #define CAR_H
 
-using namespace std;
-
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -14,7 +12,7 @@ class car{
         int id;
         int velocidad;
         int distancia_total;
-        static mutex mutex;
+        static std::mutex mutex; 
     public:
         car(int id);
         int avanzar(int tiempo);

@@ -25,13 +25,47 @@ carrera.
 #include <vector>
 #include <mutex>
 #include <cstdlib>
+#include <ctime>
 
 #include "car.h"
 
 using namespace std;
 
-int main(){
+const int Meta = 500;
 
+void carrera(car &auto_ref){
+    while(auto_ref.get_distancia_total() < Meta) {
+        int distancia = auto_ref.avanzar(1);
+        if(distancia == 0) {
+            cout << "AUTO " << auto_ref.get_id() << " se DETUVO" << endl;
+        } else {
+            cout << "Auto " << auto_ref.get_id() << " avanzo " << distancia << " metros" << endl;
+            cout << "Distancia total: " << auto_ref.get_distancia_total() << endl;
+        }
+    }
+    cout << "Auto " << auto_ref.get_id() << " ha llegado a la meta" << endl;
+}
+
+int main(){
+    srand(time(0));
+    const int N = 5;
+
+    vector<car> autos;
+    for(int i = 1; i <= N; ++i) {
+        autos.emplace_back(i);
+    }
+
+    vector<thread> threads;
+    for(int i = 0; i < N; ++i) {
+        threads.push_back(thread(carrera, ref(autos[i])));
+    }
+
+    for(auto& t : threads) {
+        t.join();
+    }
+
+    cout << "La carrera ha terminado!" << endl;
+    return 0;
 
   return 0;
 }
