@@ -31,19 +31,19 @@ carrera.
 
 using namespace std;
 
-const int Meta = 500;
+const int Meta = 50;
 
 void carrera(car &auto_ref){
     while(auto_ref.get_distancia_total() < Meta) {
         int distancia = auto_ref.avanzar(1);
         if(distancia == 0) {
-            cout << "AUTO " << auto_ref.get_id() << " se DETUVO" << endl;
+            cout << "\033[31mAUTO " << auto_ref.get_id() << " se DETUVO\033[0m" << endl;
         } else {
             cout << "Auto " << auto_ref.get_id() << " avanzo " << distancia << " metros" << endl;
             cout << "Distancia total: " << auto_ref.get_distancia_total() << endl;
         }
     }
-    cout << "Auto " << auto_ref.get_id() << " ha llegado a la meta" << endl;
+    cout << "\033[32mAuto " << auto_ref.get_id() << " ha llegado a la meta\033[0m" << endl;
 }
 
 int main(){
@@ -64,7 +64,7 @@ int main(){
         t.join();
     }
 
-    cout << "La carrera ha terminado!" << endl;
+    cout << "\033[33mLa carrera ha terminado!\033[0m" << endl;
     return 0;
 
   return 0;
